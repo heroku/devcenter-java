@@ -1,8 +1,10 @@
-This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded webserver on the [Cedar](http://devcenter.heroku.com/articles/cedar) stack.
+This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded web server on the [Cedar](http://devcenter.heroku.com/articles/cedar) stack.
+
+Sample code is available on [github](https://github.com/heroku/devcenter-java) along with this document. Edits and enhancements are welcome. Just fork the repository, make your changes and send us a pull request.
 
 ## Prerequisites
 
-* Basic Java knowledge, including an installed version of the JVM and Maven.
+* Basic Java knowledge, including an installed version of the JVM and [Maven 3](http://maven.apache.org/download.html).
 * Your application must run on the [OpenJDK](http://openjdk.java.net/) version 6.
 * A Heroku user account.  [Signup is free and instant.](https://api.heroku.com/signup)
 
