@@ -141,32 +141,48 @@ Prevent build artifacts from going into revision control by creating this file:
     :::term
     target
 
-## Build Your App
+## Build and Run Your App Locally
 
 Build your app locally:
 
     :::term
     $ mvn package
 
-## Declare Process Types With Foreman/Procfile
+Start you app locally by setting the PORT environment variable:
 
-To run your web process, you need to declare what command to use.  We'll use `Procfile` to declare how our web process type is run. The `appassembler` plugin takes care of generating a run script, `target/bin/webapp`, which we'll use to start the web app.
+On Mac & Linux:
+
+    :::term
+    $ export PORT=5000
+    $ sh target/bin/webapp
+
+On Windows:
+
+    :::term
+    $ set PORT=5000
+    $ target\bin\webapp.bat
+
+You should now see something similar to:
+
+    :::term
+    2011-08-18 15:52:24.066:INFO::jetty-7.4.5.v20110725
+    2011-08-18 15:52:24.142:INFO::started o.e.j.s.ServletContextHandler{/,null}
+    2011-08-18 15:52:24.168:INFO::Started SelectChannelConnector@0.0.0.0:5000 START
+
+Open the app in your browser:
+
+    http://localhost:5000
+
+
+## Declare Process Types With Procfile
+
+To run your web process on Heroku, you need to declare what command to use.  We'll use `Procfile` to declare how our web process type is run. The `appassembler` plugin takes care of generating a run script, `target/bin/webapp`, which we'll use to start the web app.
 
 Here's what the `Procfile` looks like:
 
     :::term
     web: sh target/bin/webapp
 
-Now that you have a `Procfile`, you can start your application with [Foreman](http://blog.daviddollar.org/2011/05/06/introducing-foreman.html):
-
-    :::term
-    $ foreman start
-    15:52:23 web.1     | started with pid 21416
-    15:52:24 web.1     | 2011-08-18 15:52:24.066:INFO::jetty-7.4.5.v20110725
-    15:52:24 web.1     | 2011-08-18 15:52:24.142:INFO::started o.e.j.s.ServletContextHandler{/,null}
-    15:52:24 web.1     | 2011-08-18 15:52:24.168:INFO::Started SelectChannelConnector@0.0.0.0:5000 START
-
-Your app will come up on port 5000.  Test that it's working with `curl` or a web browser, then Ctrl-C to exit.
 
 ## Store Your App in Git
 
