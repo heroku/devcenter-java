@@ -146,7 +146,7 @@ Prevent build artifacts from going into revision control by creating this file:
 Build your app locally:
 
     :::term
-    $ mvn install
+    $ mvn package
 
 ## Declare Process Types With Foreman/Procfile
 
