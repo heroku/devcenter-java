@@ -148,7 +148,7 @@ Build your app locally:
     :::term
     $ mvn package
 
-Start you app locally by setting the PORT environment variable:
+Start you app locally by setting the PORT environment variable and running the generated webapp script:
 
 On Mac & Linux:
 
