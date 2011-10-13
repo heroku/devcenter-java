@@ -169,9 +169,8 @@ You should now see something similar to:
     2011-08-18 15:52:24.142:INFO::started o.e.j.s.ServletContextHandler{/,null}
     2011-08-18 15:52:24.168:INFO::Started SelectChannelConnector@0.0.0.0:5000 START
 
-Open the app in your browser:
-
-    http://localhost:5000
+Open the app in your browser:  
+[http://localhost:5000](http://localhost:5000)
 
 
 ## Declare Process Types With Procfile
