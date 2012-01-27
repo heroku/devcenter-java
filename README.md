@@ -172,13 +172,11 @@ You should now see something similar to:
 Open the app in your browser:  
 [http://localhost:5000](http://localhost:5000)
     
-    If you see this error "org.apache.jasper.JasperException: java.err.nojdk" on windows, try this:
-    You must have JAVA_HOME pointing to JDK PATH.
+    If you see this error "org.apache.jasper.JasperException: java.err.nojdk" on windows (You must have JAVA_HOME pointing to JDK PATH), try this:
 
-        :::term
-        $ set PATH=%JAVA_HOME%\bin;%PATH%
-        $ set PORT=5000
-        $ target\bin\webapp.bat
+    $ set PATH=%JAVA_HOME%\bin;%PATH%
+    $ set PORT=5000
+    $ target\bin\webapp.bat
         
 
 ## Declare Process Types With Procfile
