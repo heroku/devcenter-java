@@ -165,13 +165,21 @@ On Windows:
 You should now see something similar to:
 
     :::term
-    2011-08-18 15:52:24.066:INFO::jetty-7.4.5.v20110725
-    2011-08-18 15:52:24.142:INFO::started o.e.j.s.ServletContextHandler{/,null}
-    2011-08-18 15:52:24.168:INFO::Started SelectChannelConnector@0.0.0.0:5000 START
+    2012-01-26 23:16:56.678:INFO:oejs.Server:jetty-7.5.4.v20111024
+    2012-01-26 23:16:56.886:INFO:oejsh.ContextHandler:started o.e.j.w.WebAppContext{/,file:/.../src/main/webapp/},src/main/webapp
+    2012-01-26 23:16:56.939:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:5000 STARTING
 
 Open the app in your browser:  
 [http://localhost:5000](http://localhost:5000)
+    
+    If you see this error "org.apache.jasper.JasperException: java.err.nojdk" on windows, try this:
+    You must have JAVA_HOME pointing to JDK PATH.
 
+        :::term
+        $ set PATH=%JAVA_HOME%\bin;%PATH%
+        $ set PORT=5000
+        $ target\bin\webapp.bat
+        
 
 ## Declare Process Types With Procfile
 
