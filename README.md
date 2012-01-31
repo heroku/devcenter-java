@@ -83,7 +83,7 @@ You can run any Java application on Heroku that uses Maven as build tool. As an 
 
 ## Declare Dependencies in `pom.xml`
 
-Cedar recognizes Java apps by the existence of a `pom.xml` file. Here's an example `pom.xml` for the Java/Jetty app we created above. The `maven-appassembler-plugin` generates an execution wrapper with the correct `CLASSPATH`.
+Cedar recognizes Java apps by the existence of a `pom.xml` file. Here's an example `pom.xml` for the Java/Jetty app we created above.
 
 ### pom.xml
 
@@ -100,7 +100,7 @@ Cedar recognizes Java apps by the existence of a `pom.xml` file. Here's an examp
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-servlet</artifactId>
-                <version>7.4.5.v20110725</version>
+                <version>7.6.0.v20120127</version>
             </dependency>
             <dependency>
                 <groupId>javax.servlet</groupId>
@@ -111,22 +111,14 @@ Cedar recognizes Java apps by the existence of a `pom.xml` file. Here's an examp
         <build>
             <plugins>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>appassembler-maven-plugin</artifactId>
-                    <version>1.1.1</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.4</version>
                     <executions>
                         <execution>
+                            <id>copy-dependencies</id>
                             <phase>package</phase>
-                            <goals><goal>assemble</goal></goals>
-                            <configuration>
-                                <assembleDirectory>target</assembleDirectory>
-                                <programs>
-                                    <program>
-                                        <mainClass>HelloWorld</mainClass>
-                                        <name>webapp</name>
-                                    </program>
-                                </programs>
-                            </configuration>
+                            <goals><goal>copy-dependencies</goal></goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -154,13 +146,15 @@ On Mac & Linux:
 
     :::term
     $ export PORT=5000
-    $ sh target/bin/webapp
+    $ java -cp target/classes:"target/dependency/*" HelloWorld
+
+(double quotes needed to prevent expansion of '*')
 
 On Windows:
 
     :::term
     $ set PORT=5000
-    $ target\bin\webapp.bat
+    $ java -cp target\classes:"target\dependency\*" HelloWorld
 
 You should now see something similar to:
 
@@ -180,8 +174,9 @@ To run your web process on Heroku, you need to declare what command to use.  We'
 Here's what the `Procfile` looks like:
 
     :::term
-    web: sh target/bin/webapp
+    web:    java -cp target/classes:target/dependency/* HelloWorld
 
+(note: no double quotes needed in Procfile)
 
 ## Store Your App in Git
 
@@ -241,14 +236,14 @@ Now, let's check the state of the app's processes:
     $ heroku ps
     Process       State               Command
     ------------  ------------------  ------------------------------
-    web.1         up for 10s          sh target/bin/webapp
+    web.1         up for 10s          java -cp target/classes:target
 
 The web process is up.  Review the logs for more information:
 
     :::term
     $ heroku logs
     ...
-    2011-08-18T05:30:55+00:00 heroku[web.1]: Starting process with command `java -Xmx384m -Xss256k -XX:+UseCompressedOops -classpath target/classes:"target/dependency/*" HelloWorld`
+    2011-08-18T05:30:55+00:00 heroku[web.1]: Starting process with command `java -Xmx384m -Xss256k -XX:+UseCompressedOops -cp target/classes:target/dependency/* HelloWorld`
     2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.310:INFO::jetty-7.4.5.v20110725
     2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.353:INFO::started o.e.j.s.ServletContextHandler{/,null}
     2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.389:INFO::Started SelectChannelConnector@0.0.0.0:22464 STARTING
