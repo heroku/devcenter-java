@@ -201,16 +201,17 @@ Deploy your code:
 
     :::term
     $ git push heroku master
-    Counting objects: 9, done.
+    Counting objects: 47, done.
     Delta compression using up to 4 threads.
-    Compressing objects: 100% (5/5), done.
-    Writing objects: 100% (9/9), 1.37 KiB, done.
-    Total 9 (delta 0), reused 0 (delta 0)
-    
+    Compressing objects: 100% (25/25), done.
+    Writing objects: 100% (47/47), 10.25 KiB, done.
+    Total 47 (delta 19), reused 42 (delta 17)
+
     -----> Heroku receiving push
     -----> Java app detected
     -----> Installing Maven 3.0.3..... done
-    -----> executing .maven/bin/mvn -B -Duser.home=/tmp/build_1cq2vqzdjg7yh -DskipTests=true clean install
+    -----> Installing settings.xml..... done
+    -----> executing /app/tmp/repo.git/.cache/.maven/bin/mvn -B -Duser.home=/tmp/build_3k0p14ghrmdzs -Dmaven.repo.local=/app/tmp/repo.git/.cache/.m2/repository -s /app/tmp/repo.git/.cache/.m2/settings.xml -DskipTests=true clean install
            [INFO] Scanning for projects...
            [INFO]                                                                         
            [INFO] ------------------------------------------------------------------------
@@ -220,34 +221,35 @@ Deploy your code:
            [INFO] ------------------------------------------------------------------------
            [INFO] BUILD SUCCESS
            [INFO] ------------------------------------------------------------------------
-           [INFO] Total time: 25.671s
-           [INFO] Finished at: Thu Aug 18 05:22:18 UTC 2011
-           [INFO] Final Memory: 10M/225M
+           [INFO] Total time: 10.062s
+           [INFO] Finished at: Tue Jan 31 23:27:20 UTC 2012
+           [INFO] Final Memory: 12M/490M
            [INFO] ------------------------------------------------------------------------
     -----> Discovering process types
            Procfile declares types -> web
-    -----> Compiled slug size is 12.4MB
-    -----> Launching... done, v5
-           http://stark-sword-398.herokuapp.com deployed to Heroku
+    -----> Compiled slug size is 948K
+    -----> Launching... done, v3
+           http://empty-fire-6534.herokuapp.com deployed to Heroku
 
 Now, let's check the state of the app's processes:
 
     :::term
     $ heroku ps
-    Process       State               Command
-    ------------  ------------------  ------------------------------
-    web.1         up for 10s          java -cp target/classes:target
+    Process  State       Command                               
+    -------  ----------  ------------------------------------  
+    web.1    up for 10s  java -cp target/classes:target/dep..  
 
 The web process is up.  Review the logs for more information:
 
     :::term
     $ heroku logs
     ...
-    2011-08-18T05:30:55+00:00 heroku[web.1]: Starting process with command `java -Xmx384m -Xss256k -XX:+UseCompressedOops -cp target/classes:target/dependency/* HelloWorld`
-    2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.310:INFO::jetty-7.4.5.v20110725
-    2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.353:INFO::started o.e.j.s.ServletContextHandler{/,null}
-    2011-08-18T05:30:56+00:00 app[web.1]: 2011-08-18 05:30:56.389:INFO::Started SelectChannelConnector@0.0.0.0:22464 STARTING
-    2011-08-18T05:30:56+00:00 heroku[web.1]: State changed from starting to up
+    2012-01-31T23:27:27+00:00 heroku[web.1]: Starting process with command `java -cp target/classes:target/dependency/* HelloWorld`
+    2012-01-31T23:27:28+00:00 app[web.1]: 2012-01-31 23:27:28.280:INFO:oejs.Server:jetty-7.6.0.v20120127
+    2012-01-31T23:27:28+00:00 app[web.1]: 2012-01-31 23:27:28.334:INFO:oejsh.ContextHandler:started o.e.j.s.ServletContextHandler{/,null}
+    2012-01-31T23:27:28+00:00 app[web.1]: 2012-01-31 23:27:28.373:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8236
+    2012-01-31T23:27:29+00:00 heroku[web.1]: State changed from starting to up
+    2012-01-31T23:27:32+00:00 heroku[router]: GET empty-fire-6534.herokuapp.com/ dyno=web.1 queue=0 wait=0ms service=27ms status=200 bytes=17
 
 Looks good.  We can now visit the app with `heroku open`.
 
