@@ -148,7 +148,7 @@ On Mac & Linux:
     $ export PORT=5000
     $ java -cp target/classes:"target/dependency/*" HelloWorld
 
-(double quotes needed to prevent expansion of '*')
+(double quotes needed to prevent expansion of `*`)
 
 On Windows:
 
