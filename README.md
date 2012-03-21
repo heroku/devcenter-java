@@ -1,6 +1,7 @@
 This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded web server on the [Cedar](http://devcenter.heroku.com/articles/cedar) stack.
 
-Sample code is available on [github](https://github.com/heroku/devcenter-java) along with this document. Edits and enhancements are welcome. Just fork the repository, make your changes and send us a pull request.
+{.note}
+Sample code for the [Java demo application](https://github.com/heroku/devcenter-java) is available on GitHub. Edits and enhancements are welcome.
 
 ## Prerequisites
 
@@ -10,32 +11,9 @@ Sample code is available on [github](https://github.com/heroku/devcenter-java) a
 
 ## Local Workstation Setup
 
-We'll start by setting up your local workstation with the Heroku command-line client and the Git revision control system; and then logging into Heroku to upload your `ssh` public key.  If you've used Heroku before and already have a working local setup, skip to the next section.
+Install the [Heroku Toolbelt](https://toolbelt.herokuapp.com/) on your local workstation.  This ensures that you have access to the [Heroku command-line client](http://devcenter.heroku.com/categories/command-line), Foreman, and the Git revision control system.
 
-<table>
-  <tr>
-    <th>If you have...</th>
-    <th>Install with...</th>
-  </tr>
-  <tr>
-    <td>Mac OS X</td>
-    <td style="text-align: left"><a href="http://toolbelt.herokuapp.com/osx/download">Download OS X package</a></td>
-  </tr>
-  <tr>
-    <td>Windows</td>
-    <td style="text-align: left"><a href="http://toolbelt.herokuapp.com/windows/download">Download Windows .exe installer</a></td>
-  </tr>
-  <tr>
-    <td>Ubuntu Linux</td>
-    <td style="text-align: left"><a href="http://toolbelt.herokuapp.com/linux/readme"><code>apt-get</code> repository</a></td>
-  </tr>
-  <tr>
-    <td>Other</td>
-    <td style="text-align: left"><a href="http://assets.heroku.com/heroku-client/heroku-client.tgz">Tarball</a> (add contents to your <code>$PATH</code>)</td>
-  </tr>
-</table>
-
-Once installed, you'll have access to the `heroku` command from your command shell.  Log in using the email address and password you used when creating your Heroku account:
+Once installed, you can use the `heroku` command from your command shell.  Log in using the email address and password you used when creating your Heroku account:
 
     :::term
     $ heroku login
