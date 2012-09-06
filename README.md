@@ -1,4 +1,4 @@
-This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded web server on the [Cedar](http://devcenter.heroku.com/articles/cedar) stack.
+This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded web server, deployed to Heroku.
 
 {.note}
 Sample code for the [Java demo application](https://github.com/heroku/devcenter-java) is available on GitHub. Edits and enhancements are welcome.
@@ -6,10 +6,10 @@ Sample code for the [Java demo application](https://github.com/heroku/devcenter-
 ## Prerequisites
 
 * Basic Java knowledge, including an installed version of the JVM and [Maven 3](http://maven.apache.org/download.html).
-* Your application must run on the [OpenJDK](http://openjdk.java.net/) version 6.
-* A Heroku user account.  [Signup is free and instant.](https://api.heroku.com/signup)
+* Your application must run on the [OpenJDK](http://openjdk.java.net/) version 6, or 7 (8 is also available in beta).
+* A Heroku user account.  [Signup is free and instant.](https://api.heroku.com/signup/devcenter)
 
-## Local Workstation Setup
+## Local workstation setup
 
 Install the [Heroku Toolbelt](https://toolbelt.herokuapp.com/) on your local workstation.  This ensures that you have access to the [Heroku command-line client](http://devcenter.heroku.com/categories/command-line), Foreman, and the Git revision control system.
 
@@ -27,7 +27,7 @@ Once installed, you can use the `heroku` command from your command shell.  Log i
 
 Press enter at the prompt to upload your existing `ssh` key or create a new one, used for pushing code later on.
 
-## Write Your App
+## Write your app
     
 You can run any Java application on Heroku that uses Maven as build tool. As an example, we will write a web app using Jetty. Here is a basic servlet class that also contains a main method to start up the application:
 
@@ -59,7 +59,7 @@ You can run any Java application on Heroku that uses Maven as build tool. As an 
         }
     }
 
-## Declare Dependencies in `pom.xml`
+## Declare dependencies in `pom.xml`
 
 Cedar recognizes Java apps by the existence of a `pom.xml` file. Here's an example `pom.xml` for the Java/Jetty app we created above.
 
@@ -111,7 +111,7 @@ Prevent build artifacts from going into revision control by creating this file:
     :::term
     target
 
-## Build and Run Your App Locally
+## Build and run your app locally
 
 Build your app locally:
 
@@ -145,7 +145,7 @@ Open the app in your browser:
 [http://localhost:5000](http://localhost:5000)
 
 
-## Declare Process Types With Procfile
+## Declare process types with a Procfile
 
 To run your web process on Heroku, you need to declare what command to use.  We'll use `Procfile` to declare how our web process type is run.
 
@@ -156,7 +156,17 @@ Here's what the `Procfile` looks like:
 
 (note: no double quotes needed in Procfile)
 
-## Store Your App in Git
+## Optionally Choose a JDK
+By default, OpenJDK 1.6 is installed with your app. However, you can choose to use a newer JDK by specifying `java.runtime.version=1.7` in the `system.properties` file.
+
+Here's what a `system.properties` file looks like:
+
+    :::term
+    java.runtime.version=1.7
+
+You can specify 1.6, 1.7, or 1.8 (1.8 is in beta) for Java 6, 7, or 8 (with lambdas), respectively.
+
+## Store your app in Git
 
 We now have the three major components of our app: build configuration and dependencies in `pom.xml`, process types in `Procfile`, and our application source in `src/main/java/HelloWorld.java`.  Let's put it into Git:
 
@@ -165,12 +175,12 @@ We now have the three major components of our app: build configuration and depen
     $ git add .
     $ git commit -m "init"
 
-## Deploy to Heroku/Cedar
+## Deploy to Heroku
 
-Create the app on the Cedar stack:
+Create the app:
 
     :::term
-    $ heroku create --stack cedar
+    $ heroku create
     Creating stark-sword-398... done, stack is cedar
     http://stark-sword-398.herokuapp.com/ | git@heroku.com:stark-sword-398.git
     Git remote heroku added
@@ -187,8 +197,9 @@ Deploy your code:
 
     -----> Heroku receiving push
     -----> Java app detected
-    -----> Installing Maven 3.0.3..... done
-    -----> Installing settings.xml..... done
+    -----> Installing OpenJDK 1.6... done
+    -----> Installing Maven 3.0.3... done
+    -----> Installing settings.xml... done
     -----> executing /app/tmp/repo.git/.cache/.maven/bin/mvn -B -Duser.home=/tmp/build_3k0p14ghrmdzs -Dmaven.repo.local=/app/tmp/repo.git/.cache/.m2/repository -s /app/tmp/repo.git/.cache/.m2/settings.xml -DskipTests=true clean install
            [INFO] Scanning for projects...
            [INFO]                                                                         
@@ -231,6 +242,6 @@ The web process is up.  Review the logs for more information:
 
 Looks good. We can now visit the app with `heroku open`.
 
-## Next Step: Database-driven Apps
+## Next steps: database-driven apps
 
 The [Spring MVC Hibernate tutorial](spring-mvc-hibernate) will guide you through setting up a database-driven application on Heroku.
