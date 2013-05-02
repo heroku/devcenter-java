@@ -244,4 +244,4 @@ Looks good. We can now visit the app with `heroku open`.
 
 ## Next steps: database-driven apps
 
-The [Spring MVC Hibernate tutorial](spring-mvc-hibernate) will guide you through setting up a database-driven application on Heroku.
+The [Spring MVC Hibernate tutorial](http://devcenter.heroku.com/articles/spring-mvc-hibernate) will guide you through setting up a database-driven application on Heroku.
