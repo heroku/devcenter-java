@@ -31,6 +31,11 @@ Press enter at the prompt to upload your existing `ssh` key or create a new one,
     
 You can run any Java application on Heroku that uses Maven as build tool. As an example, we will write a web app using Jetty. Here is a basic servlet class that also contains a main method to start up the application:
 
+
+####To test this example, clone the repository in the following way and continue reading below by "Build and run your app locally".
+    git clone git://github.com/miguel5/devcenter-java.git
+
+
 ### src/main/java/HelloWorld.java
 
     :::java
@@ -168,6 +173,11 @@ You can specify 1.6, 1.7, or 1.8 (1.8 is in beta) for Java 6, 7, or 8 (with lamb
 
 ## Store your app in Git
 
+#### If you have cloned the repository from GitHub already (called devcenter-java/), you don't have to initialize an empty instance. Instead, add it to be committed by typing the following command and continue reading by "Deploy to Heroku".
+    $ git add devcenter-java/
+    $ git status
+    $ git commit -m "first commit"
+
 We now have the three major components of our app: build configuration and dependencies in `pom.xml`, process types in `Procfile`, and our application source in `src/main/java/HelloWorld.java`.  Let's put it into Git:
 
     :::term
@@ -186,6 +196,27 @@ Create the app:
     Git remote heroku added
 
 Deploy your code:
+
+#### Typing "$ git push heroku master" may yield an error message instructing you to get the correct access rights. That's because you need a key that identifies your machine with Heroku.
+For more information, check: https://devcenter.heroku.com/articles/keys 
+
+The error message reads:
+
+    Permission denied (publickey).
+    fatal: Could not read from remote repository.
+    Please make sure you have the correct access rights
+    and the repository exists.
+
+Consequently, you must generate a key by typing:
+
+    $ ssh-keygen -t rsa
+    # A key fingerprint will be generating after prompting you for a passphrase (may leave empty)
+    $ heroku keys:add
+    # Choose the relevant SSH key (typically named id_rsa.pub)
+
+
+#### Continue by typing "$ git push heroku master" as shown below:
+--------------------------------
 
     :::term
     $ git push heroku master
