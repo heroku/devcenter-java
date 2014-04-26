@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* HelloWorld
+web:    mvn -e org.codehaus.mojo:exec-maven-plugin:java
